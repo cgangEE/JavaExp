@@ -1,0 +1,17 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+
+public class Client {
+	public static void main(String args[]){
+		JFrame mw = new JFrame("Client");
+		JTextArea textA=new JTextArea("",5,10);
+		mw.add(textA);
+		mw.setSize(500,500);
+		
+		mw.setBackground(Color.black);
+		mw.setVisible(true);
+	}
+}

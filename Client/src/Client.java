@@ -1,0 +1,94 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+
+public class Client {
+	static Socket socket = null;
+	static DataInputStream in = null;
+	static DataOutputStream out = null;
+	static Window window = null;
+	void receive(){
+		try {
+			String s = in.readUTF();
+			window.talk.insert(s, 0);
+		} catch (IOException e) {}
+	}
+
+	void send(){
+		try {
+			out.writeUTF(window.input.getText());
+			window.input.setText("");
+		} catch (IOException e) {}
+	}
+	public static void main(String args[]){
+		
+		try{
+			socket = new Socket("localhost", 12306);
+			in = new DataInputStream(socket.getInputStream());
+			out = new DataOutputStream(socket.getOutputStream());
+		}
+		catch (IOException e){
+			System.out.println(e);
+		}
+			
+		
+		if (socket != null){
+			window = new Window();
+		}
+	}
+
+}
+
+class Window{
+	static JFrame client = null;
+	static JTextArea talk = null;
+	static JTextField input = null;
+	static JButton send = null;
+	Window(){
+		if (client == null){
+			client = new JFrame("Client");
+		
+			client.setLayout(new BorderLayout());
+		
+			talk = new JTextArea("", 20, 40);
+			input = new JTextField(40);
+			JButton send = new JButton("send");
+		
+			send.addActionListener(new ButtonHandler());
+			
+			client.add(talk, BorderLayout.NORTH);
+			client.add(input,  BorderLayout.CENTER);
+			client.add(send, BorderLayout.SOUTH);
+			
+			client.setSize(500, 500);
+			
+			client.pack();
+			client.setVisible(true);
+			
+			Update_thread t = new Update_thread();
+			t.start();
+		}
+	}		
+}
+
+class Update_thread extends Thread {
+	Update_thread() {
+	}
+
+	public void run() {
+		while (true) {
+			new Client().receive();
+		}
+	}
+}
+
+class ButtonHandler implements ActionListener{
+	public void actionPerformed(ActionEvent e){
+		new Client().send();
+	}
+}

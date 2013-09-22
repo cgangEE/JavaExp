@@ -1,0 +1,57 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+
+public class Main {
+	static boolean ok(String t){
+		for (int i=0; i<t.length(); ++i) if (t.charAt(i)!=' ')
+			return true;
+		return false;
+	}
+	static int a[]=new int [1000];
+	
+	public static void main(String args[]){
+		Scanner cin = new Scanner(System.in);
+
+		boolean first=true;
+		
+		while (cin.hasNext()){
+			if (first) first=false;
+			else System.out.println();
+			
+			String s=cin.nextLine();
+			while (!ok(s)){
+				s=cin.nextLine();
+			}
+			
+			int n=0;
+			for (int i=0; i<s.length(); ++i) if (s.charAt(i)!=' ') a[s.charAt(i)]=n++;
+			String t=cin.nextLine();
+
+	
+			while (ok(t)){
+				
+				int k=2;
+				for (int i=0; i<t.length(); ++i) {
+					int j=a[t.charAt(i)]+1;
+					if (j>k) k=j;
+				}
+
+				BigInteger ret=BigInteger.ZERO;
+				for (int i=k; i<=n; ++i){
+					BigInteger now = BigInteger.ZERO, w=BigInteger.valueOf(i);
+
+					for (int j=0; j<t.length(); ++j) if (t.charAt(j)!=' ')
+						now=now.multiply(w).add(BigInteger.valueOf(a[t.charAt(j)]));
+					
+					ret=ret.add(now);
+				}
+				System.out.println(ret);
+						
+				t=cin.nextLine();
+			}
+			
+		}
+	}
+}

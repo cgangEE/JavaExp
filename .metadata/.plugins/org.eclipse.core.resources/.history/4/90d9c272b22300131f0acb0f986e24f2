@@ -1,0 +1,26 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+
+public class Client {
+	public static void main(String args[]){
+		JFrame client = new JFrame("Client");
+		
+		client.setLayout(new FlowLayout());
+		
+		JTextArea talk = new JTextArea();
+		
+		JTextField input = new JTextFiled();
+		
+		JButton send = new JButton("send");
+		
+		client.add(talk);
+		client.add(input);
+		client.add(send);
+		
+		client.pack();
+		client.setVisible(true);
+	}
+}

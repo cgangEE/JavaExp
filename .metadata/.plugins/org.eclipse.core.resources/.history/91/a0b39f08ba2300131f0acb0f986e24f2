@@ -1,0 +1,42 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+
+public class Client {
+	public static void main(String args[]){
+		Window window = new Window();
+	}
+}
+
+class Window{
+	Window(){
+		JFrame client = new JFrame("Client");
+		
+		client.setLayout(new BorderLayout());
+		
+		JTextArea talk = new JTextArea("", 20, 40);
+		JTextField input = new JTextField(40);
+		JButton send = new JButton("send");
+		
+		send.addActionListener(new ButtonHandler());
+		
+		client.add(talk, BorderLayout.NORTH);
+		client.add(input,  BorderLayout.CENTER);
+		client.add(send, BorderLayout.SOUTH);
+		
+		client.setSize(500, 500);
+		
+		client.pack();
+		client.setVisible(true);
+	}		
+}
+
+class ButtonHandler implements ActionListener{
+	public void actionPerformed(ActionEvent e){
+		
+	}
+}

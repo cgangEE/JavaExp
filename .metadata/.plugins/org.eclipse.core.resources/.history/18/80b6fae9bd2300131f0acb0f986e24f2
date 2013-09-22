@@ -1,0 +1,64 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+
+public class Client {
+	
+
+	
+	class ButtonHandler implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+		}
+	}
+	
+	static Socket socket = null;
+	static DataInputStream in = null;
+	static DataOutputStream out = null;
+	
+	public static void main(String args[]){
+
+		
+		while (socket == null){
+			try{
+				socket = new Socket("localhost", 12306);
+				in = new DataInputStream(socket.getInputStream());
+				out = new DataOutputStream(socket.getOutputStream());
+			}
+			catch (IOException e){
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e1) {}
+			}
+		}
+		
+		JFrame client = new JFrame("Client");
+		
+		client.setLayout(new BorderLayout());
+		
+		JTextArea talk = new JTextArea("", 20, 40);
+		JTextField input = new JTextField(40);
+		JButton send = new JButton("send");
+		
+		send.addActionListener(new ButtonHandler());
+		
+		client.add(talk, BorderLayout.NORTH);
+		client.add(input,  BorderLayout.CENTER);
+		client.add(send, BorderLayout.SOUTH);
+		
+		client.setSize(500, 500);
+		
+		client.pack();
+		client.setVisible(true);			
+		
+		
+	}
+}
+
+
+

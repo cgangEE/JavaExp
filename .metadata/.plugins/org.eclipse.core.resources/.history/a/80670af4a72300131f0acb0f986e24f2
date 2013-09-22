@@ -1,0 +1,10 @@
+import javax.swing.*;
+import java.io.*;
+import java.util.*;
+
+public class Client {
+	public static void main(String args[]){
+		JFrame mw = new JFrame("Client");
+		mw.setVisible(true);
+	}
+}

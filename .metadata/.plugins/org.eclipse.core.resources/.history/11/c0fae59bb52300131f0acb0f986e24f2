@@ -1,0 +1,33 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+
+
+public class Client {
+	public static void main(String args[]){
+		Window window = new Window();
+	}
+}
+
+class Window{
+	Window(){
+		JFrame client = new JFrame("Client");
+		
+		client.setLayout(new BorderLayout());
+		
+		JTextArea talk = new JTextArea("", 20, 20);
+		JTextField input = new JTextField(20);
+		JButton send = new JButton("send");
+		
+		client.add(talk);
+		client.add(input, BorderLayout.CENTER);
+		client.add(send, BorderLayout.SOUTH);
+		
+		client.setSize(500, 500);
+		
+		client.pack();
+		client.setVisible(true);
+	}		
+}

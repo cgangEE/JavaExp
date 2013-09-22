@@ -1,0 +1,67 @@
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class Server {
+	public static void main(String args[]) {
+		ServerSocket server = null;
+		Socket you = null;
+
+		System.out.println("Fuck up, it's begin...");
+		while (true) {
+			try {
+				server = new ServerSocket(12306);
+			} catch (IOException e1) {
+				System.out.println("can't listening" + e1);
+			}
+
+			try {
+				if (server == null)
+					System.out.println("FT");
+				you = server.accept();
+				InetAddress adr = you.getInetAddress();
+				System.out.println(adr);
+			} catch (IOException e) {
+			}
+
+			if (you != null) {
+				Server_thread t = new Server_thread(you);
+				t.start();
+			}
+		}
+	}
+}
+
+class Server_thread extends Thread {
+	Socket socket = null;
+	DataInputStream in = null;
+	DataOutputStream out = null;
+
+	Server_thread(Socket t) {
+		socket = t;
+		try {
+			in = new DataInputStream(socket.getInputStream());
+			out = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+		}
+	}
+
+	public void run() {
+		while (true) {
+
+			try {
+				String s;
+				s = in.readUTF();
+				System.out.println(s);
+				if (s.equals("bye")) {
+					socket.close();
+					break;
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+}
