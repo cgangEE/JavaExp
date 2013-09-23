@@ -91,8 +91,8 @@ class Window{
 			JButton send = new JButton("send");
 			
 			JPanel p=new JPanel();
-			 
-			 JScrollPane text2=new JScrollPane(talk);
+			 JTextArea text = new JTextArea();
+			 JScrollPane text2=new JScrollPane(send);
 			
 			p.add(text2);
 			

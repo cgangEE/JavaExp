@@ -92,9 +92,9 @@ class Window{
 			
 			JPanel p=new JPanel();
 			 
-			 JScrollPane text2=new JScrollPane(talk);
+			 JScrollPane text2=new JScrollPane(send);
 			
-			p.add(text2);
+			p.add(input);
 			
 			send.addActionListener(new ButtonHandler());
 			

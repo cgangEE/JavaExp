@@ -19,7 +19,7 @@ public class Client {
 	void receive(){
 		try {
 			String s = in.readUTF();
-			
+			s+='\n';
 			window.talk.insert(s, line);
 			line+=s.length();
 		} catch (IOException e) {}
@@ -27,7 +27,7 @@ public class Client {
 
 	void send(){
 		try {
-			out.writeUTF(name+'\n'+window.input.getText()+"\n\n");
+			out.writeUTF(window.input.getText());
 			window.input.setText("");
 		} catch (IOException e) {}
 	}
@@ -69,6 +69,7 @@ public class Client {
 		}
 	}
 	static void begin(){
+		
 		name = input.getText();
 		frame.dispose();   
 		window = new Window();
@@ -89,16 +90,10 @@ class Window{
 			talk = new JTextArea("", 20, 40);
 			input = new JTextField(40);
 			JButton send = new JButton("send");
-			
-			JPanel p=new JPanel();
-			 
-			 JScrollPane text2=new JScrollPane(talk);
-			
-			p.add(text2);
-			
+		
 			send.addActionListener(new ButtonHandler());
 			
-			client.add(p, BorderLayout.NORTH);
+			client.add(talk, BorderLayout.NORTH);
 			client.add(input,  BorderLayout.CENTER);
 			client.add(send, BorderLayout.SOUTH);
 			
@@ -127,9 +122,7 @@ class Update_thread extends Thread {
 
 class GetNameButton implements ActionListener{
 	public void actionPerformed(ActionEvent e){
-		if (!(new Client().input.getText().equals("")))
-			new Client().begin();
-		
+		new Client().begin();
 	}
 }
 

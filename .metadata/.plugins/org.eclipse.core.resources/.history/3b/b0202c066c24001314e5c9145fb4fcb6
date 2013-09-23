@@ -92,13 +92,13 @@ class Window{
 			
 			JPanel p=new JPanel();
 			 
-			 JScrollPane text2=new JScrollPane(talk);
+			 JScrollPane text2=new JScrollPane(input);
 			
 			p.add(text2);
 			
 			send.addActionListener(new ButtonHandler());
 			
-			client.add(p, BorderLayout.NORTH);
+			client.add(text2, BorderLayout.NORTH);
 			client.add(input,  BorderLayout.CENTER);
 			client.add(send, BorderLayout.SOUTH);
 			
