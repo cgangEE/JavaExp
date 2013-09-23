@@ -12,13 +12,10 @@ public class Client {
 	static DataInputStream in = null;
 	static DataOutputStream out = null;
 	static Window window = null;
-	static int line = 0;
 	void receive(){
 		try {
 			String s = in.readUTF();
-			s+='\n';
-			window.talk.insert(s, line);
-			line+=s.length();
+			window.talk.insert(s, 0);
 		} catch (IOException e) {}
 	}
 
@@ -70,7 +67,6 @@ class Window{
 			
 			client.setSize(500, 500);
 			
-			client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			client.pack();
 			client.setVisible(true);
 			
