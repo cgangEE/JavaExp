@@ -54,7 +54,7 @@ public class Client {
 	public static void main(String args[]){
 		
 		try{
-			socket = new Socket("acm.zzu.edu.cn", 12306);
+			socket = new Socket("localhost", 12306);
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
 		}

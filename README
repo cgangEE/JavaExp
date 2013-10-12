@@ -1,0 +1,6 @@
+﻿Client 这是客户端
+   Client通过socket与Server建立连接，通过Update_thread来接受信息。
+
+Server 是服务端
+   Server通过监听12306端口，如果监听到客户端，则创建Server_thread与之交互。
+
